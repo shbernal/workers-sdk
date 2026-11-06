@@ -1,5 +1,13 @@
 # @cloudflare/workers-utils
 
+## 0.52.1
+
+### Patch Changes
+
+- [#15621](https://github.com/cloudflare/workers-sdk/pull/15621) [`cff83d0`](https://github.com/cloudflare/workers-sdk/commit/cff83d0220b51c7cfdf422bcd5091a8fbea76d81) Thanks [@petebacondarwin](https://github.com/petebacondarwin)! - Avoid materializing unused multipart request bodies
+
+  Wrangler no longer creates a full text copy of multipart API request bodies when debug logs are disabled or sanitized. This substantially reduces peak memory use when uploading large batches of static assets while preserving request-body output when unsanitized debug logging is explicitly enabled.
+
 ## 0.52.0
 
 ### Minor Changes

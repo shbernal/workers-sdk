@@ -1,5 +1,27 @@
 # @cloudflare/vite-plugin
 
+## 2.0.0-beta.v.13
+
+### Minor Changes
+
+- [#16599](https://github.com/cloudflare/workers-sdk/pull/16599) [`dee7a1d`](https://github.com/cloudflare/workers-sdk/commit/dee7a1d7e9b5641cb077e5a91c7f36ea98f1e9a1) Thanks [@petebacondarwin](https://github.com/petebacondarwin)! - Support `CLOUDFLARE_AUTH_PROFILE` for shared authentication profile selection
+
+  Cloudflare tooling can pass a selected profile to child processes through `CLOUDFLARE_AUTH_PROFILE`. Explicit profile arguments take precedence over the variable, followed by directory bindings and the default profile. The `cf-wrangler` development delegate also initializes cf authentication so it reads the selected cf credentials.
+
+  Experimental cf development delegates inherit the selected profile without additional command-line flags. Vite refreshes remote authentication when the resolved profile changes, and `cf-wrangler` keeps its authentication scoped to the delegate invocation.
+
+### Patch Changes
+
+- [#16608](https://github.com/cloudflare/workers-sdk/pull/16608) [`0d9cf4e`](https://github.com/cloudflare/workers-sdk/commit/0d9cf4ee7e58c44c3676483d7ea6cb3fc7c0633c) Thanks [@petebacondarwin](https://github.com/petebacondarwin)! - Preserve the server origin when constructing Worker request URLs
+
+  HTTP requests, WebSocket upgrades, and static routing now consistently treat incoming paths as paths on the selected server origin in dev and preview. Encoded paths and query strings are preserved, and non-origin-form request targets are rejected.
+
+- Updated dependencies []:
+  - @cloudflare/build-output-utils@0.9.10
+  - @cloudflare/config@0.30.2
+  - miniflare@5.20261104.0-beta
+  - @cloudflare/runtime-types@0.1.23
+
 ## 2.0.0-beta.v.12
 
 ### Minor Changes

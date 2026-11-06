@@ -1,5 +1,42 @@
 # wrangler
 
+## 4.159.0
+
+### Minor Changes
+
+- [#16599](https://github.com/cloudflare/workers-sdk/pull/16599) [`dee7a1d`](https://github.com/cloudflare/workers-sdk/commit/dee7a1d7e9b5641cb077e5a91c7f36ea98f1e9a1) Thanks [@petebacondarwin](https://github.com/petebacondarwin)! - Support `CLOUDFLARE_AUTH_PROFILE` for shared authentication profile selection
+
+  Cloudflare tooling can pass a selected profile to child processes through `CLOUDFLARE_AUTH_PROFILE`. Explicit profile arguments take precedence over the variable, followed by directory bindings and the default profile. The `cf-wrangler` development delegate also initializes cf authentication so it reads the selected cf credentials.
+
+  Experimental cf development delegates inherit the selected profile without additional command-line flags. Vite refreshes remote authentication when the resolved profile changes, and `cf-wrangler` keeps its authentication scoped to the delegate invocation.
+
+- [#16066](https://github.com/cloudflare/workers-sdk/pull/16066) [`4112820`](https://github.com/cloudflare/workers-sdk/commit/41128206d0158bce2243bec7bd59fa7efc563aaf) Thanks [@petebacondarwin](https://github.com/petebacondarwin)! - Add an explicit opt-out for main module imports in generated Worker types
+
+  Use `wrangler types --include-main-module=false` when the Worker entrypoint is generated build output that should not be type-checked as application source. The corresponding `includeMainModule` option is available in the experimental type-generation API. The option is preserved by `--check` and automatic regeneration. Omitting the import opts out of module-derived `ctx.exports` typing while preserving runtime types, environment bindings, and Durable Object namespace declarations.
+
+  New SvelteKit Workers projects created with C3 use this option so their generated declarations remain stable before and after a build. Imports needed to type Durable Object, service, and Workflow bindings are unaffected.
+
+### Patch Changes
+
+- [#15621](https://github.com/cloudflare/workers-sdk/pull/15621) [`cff83d0`](https://github.com/cloudflare/workers-sdk/commit/cff83d0220b51c7cfdf422bcd5091a8fbea76d81) Thanks [@petebacondarwin](https://github.com/petebacondarwin)! - Report a failed Wrangler command when the CLI child is terminated by a signal
+
+  Wrangler's executable previously translated signal termination into exit code 0, which could cause callers to report a successful deployment after the operating system stopped Wrangler. Signal exits now use the conventional nonzero shell status.
+
+- [#16066](https://github.com/cloudflare/workers-sdk/pull/16066) [`4112820`](https://github.com/cloudflare/workers-sdk/commit/41128206d0158bce2243bec7bd59fa7efc563aaf) Thanks [@petebacondarwin](https://github.com/petebacondarwin)! - Preserve environment inputs when automatically regenerating Worker types
+
+  Automatic type regeneration now reuses the recorded `--env` and `--env-file` options. This keeps environment-specific bindings and secret declarations consistent with the generated header and subsequent `wrangler types --check` runs.
+
+- [#15621](https://github.com/cloudflare/workers-sdk/pull/15621) [`cff83d0`](https://github.com/cloudflare/workers-sdk/commit/cff83d0220b51c7cfdf422bcd5091a8fbea76d81) Thanks [@petebacondarwin](https://github.com/petebacondarwin)! - Avoid materializing unused multipart request bodies
+
+  Wrangler no longer creates a full text copy of multipart API request bodies when debug logs are disabled or sanitized. This substantially reduces peak memory use when uploading large batches of static assets while preserving request-body output when unsanitized debug logging is explicitly enabled.
+
+- [#16664](https://github.com/cloudflare/workers-sdk/pull/16664) [`9b6582c`](https://github.com/cloudflare/workers-sdk/commit/9b6582cc911b04de667d0055eabd513813d8b634) Thanks [@dario-piotrowicz](https://github.com/dario-piotrowicz)! - Stop `getPlatformProxy()` asset misses from recursively calling its own listener
+
+  Requests for assets that do not exist now return a 404 response without hanging or exhausting local development resources.
+
+- Updated dependencies []:
+  - miniflare@5.20261104.0-beta
+
 ## 4.158.0
 
 ### Minor Changes

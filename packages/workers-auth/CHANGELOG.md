@@ -1,5 +1,20 @@
 # @cloudflare/workers-auth
 
+## 0.17.0
+
+### Minor Changes
+
+- [#16599](https://github.com/cloudflare/workers-sdk/pull/16599) [`dee7a1d`](https://github.com/cloudflare/workers-sdk/commit/dee7a1d7e9b5641cb077e5a91c7f36ea98f1e9a1) Thanks [@petebacondarwin](https://github.com/petebacondarwin)! - Support `CLOUDFLARE_AUTH_PROFILE` for shared authentication profile selection
+
+  Cloudflare tooling can pass a selected profile to child processes through `CLOUDFLARE_AUTH_PROFILE`. Explicit profile arguments take precedence over the variable, followed by directory bindings and the default profile. The `cf-wrangler` development delegate also initializes cf authentication so it reads the selected cf credentials.
+
+  Experimental cf development delegates inherit the selected profile without additional command-line flags. Vite refreshes remote authentication when the resolved profile changes, and `cf-wrangler` keeps its authentication scoped to the delegate invocation.
+
+### Patch Changes
+
+- Updated dependencies [[`cff83d0`](https://github.com/cloudflare/workers-sdk/commit/cff83d0220b51c7cfdf422bcd5091a8fbea76d81)]:
+  - @cloudflare/workers-utils@0.52.1
+
 ## 0.16.0
 
 ### Minor Changes

@@ -1,5 +1,20 @@
 # @cloudflare/autoconfig
 
+## 0.10.0
+
+### Minor Changes
+
+- [#16018](https://github.com/cloudflare/workers-sdk/pull/16018) [`bd6b82a`](https://github.com/cloudflare/workers-sdk/commit/bd6b82a8d401dad64df2b5d98c7be76fa422f647) Thanks [@edmundhung](https://github.com/edmundhung)! - Configure Astro projects for cf with the latest compatible beta releases
+
+  Astro 7 projects can now be automatically configured for cf with the latest compatible beta releases of Astro and the Cloudflare adapter.
+
+### Patch Changes
+
+- Updated dependencies [[`cff83d0`](https://github.com/cloudflare/workers-sdk/commit/cff83d0220b51c7cfdf422bcd5091a8fbea76d81)]:
+  - @cloudflare/workers-utils@0.52.1
+  - @cloudflare/cli-shared-helpers@0.3.5
+  - @cloudflare/config@0.30.2
+
 ## 0.9.3
 
 ### Patch Changes
